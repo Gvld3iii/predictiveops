@@ -1,27 +1,21 @@
-# ⚡ PredictiveOps — AWS Outage Early-Warning System
+# ⚡ PredictiveOps  
+**Autonomous AWS Outage Prevention & Auto-Healing System**
 
-**PredictiveOps** is an AWS-native early-warning framework that predicts regional or service-level instability *before* it causes downtime.  
-It leverages **CloudWatch**, **DevOps Guru**, **Lambda**, **EventBridge**, and **SNS** to monitor real-time telemetry and trigger proactive alerts.
+PredictiveOps is an AI-assisted early-warning platform that detects latency spikes, error bursts, DNS anomalies, ECS/EC2 degradation, and automatically triggers SSM runbooks to heal clusters and instances before downtime hits.
 
-## 🚀 Features
-- Anomaly detection with CloudWatch & DevOps Guru
-- Lambda correlator computes a risk score from latency, error rates, DNS anomalies
-- SNS emails for proactive alerts
-- Route53 Resolver logs → NXDOMAIN anomaly metric
+### 🚀 Features
+- ECS auto-redeploy based on Lambda-computed risk  
+- EC2 auto-restart with SSM Automation  
+- DynamoDB risk ledger  
+- Cooldown engine  
+- SNS alerting  
+- Fully serverless, low-cost, enterprise-grade  
 
-## 🧩 Flow
-1. Metrics & logs → CloudWatch  
-2. CloudWatch + DevOps Guru insights → EventBridge  
-3. EventBridge rule → triggers `predictive-correlator` Lambda  
-4. Lambda → computes risk & publishes to SNS (`predictive-outage-alerts`)  
-5. SNS → sends early warning emails
+### 📂 Included
+- Lambda source  
+- SSM Runbooks  
+- IAM role exports  
+- DynamoDB table schema  
+- Deployment-ready infra snapshot zip  
 
-## 🧠 Core Lambda Logic
-```python
-if latency > 200: risk += 0.5
-if errors  > 1.0: risk += 0.5
-if risk >= 0.7:
-    sns.publish(TopicArn=SNS_ARN,
-      Subject="[PredictiveOps] Early outage signal",
-      Message=json.dumps({"latency":latency,"errors":errors,"risk":risk}))
-md
+More docs + architecture diagrams coming soon.

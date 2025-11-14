@@ -1,0 +1,26 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "predictiveops-automation-role",
+        "RoleId": "AROA5KZ43KBNZMF564XNE",
+        "Arn": "arn:aws:iam::916566265947:role/predictiveops-automation-role",
+        "CreateDate": "2025-11-04T16:51:27+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "ssm.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        },
+        "MaxSessionDuration": 3600,
+        "RoleLastUsed": {
+            "LastUsedDate": "2025-11-14T15:26:10+00:00",
+            "Region": "us-east-1"
+        }
+    }
+}

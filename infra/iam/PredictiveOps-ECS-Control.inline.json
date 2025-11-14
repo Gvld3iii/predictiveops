@@ -1,0 +1,30 @@
+{
+    "RoleName": "predictiveops-automation-role",
+    "PolicyName": "PredictiveOps-ECS-Control",
+    "PolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "ReadECS",
+                "Effect": "Allow",
+                "Action": [
+                    "ecs:ListClusters",
+                    "ecs:DescribeClusters",
+                    "ecs:DescribeServices",
+                    "ecs:ListTasks",
+                    "ecs:DescribeTasks",
+                    "ecs:DescribeTaskDefinition"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Sid": "ForceDeploy",
+                "Effect": "Allow",
+                "Action": [
+                    "ecs:UpdateService"
+                ],
+                "Resource": "arn:aws:ecs:us-east-1:916566265947:service/predictiveops-demo/predictiveops-demo-svc"
+            }
+        ]
+    }
+}

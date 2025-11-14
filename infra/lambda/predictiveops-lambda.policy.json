@@ -1,0 +1,4 @@
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"predictiveops-AllowEvents\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:916566265947:function:predictiveops-lambda\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:events:us-east-1:916566265947:rule/PredictiveOpsAnomalyRule\"}}},{\"Sid\":\"PredictiveOps-AllowEvents\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:916566265947:function:predictiveops-lambda\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:events:us-east-1:916566265947:rule/PredictiveOpsAnomalyRule\"}}}]}",
+    "RevisionId": "34169980-ad06-48e7-9055-ea2c07fff466"
+}

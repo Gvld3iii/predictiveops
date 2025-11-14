@@ -1,0 +1,6 @@
+{
+    "PolicyNames": [
+        "PredictiveOps-EC2-Control",
+        "PredictiveOps-ECS-Control"
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "predictiveops-lambda-role",
+        "RoleId": "AROA5KZ43KBNTXVW2GZXD",
+        "Arn": "arn:aws:iam::916566265947:role/predictiveops-lambda-role",
+        "CreateDate": "2025-11-04T01:50:47+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "lambda.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        },
+        "MaxSessionDuration": 3600,
+        "RoleLastUsed": {
+            "LastUsedDate": "2025-11-14T15:23:13+00:00",
+            "Region": "us-east-1"
+        }
+    }
+}

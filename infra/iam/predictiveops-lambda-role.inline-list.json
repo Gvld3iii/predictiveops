@@ -1,0 +1,6 @@
+{
+    "PolicyNames": [
+        "predictiveops-allow-pass-automation-role",
+        "PredictiveOps-Lambda-Restricted"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "AmazonECS_FullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+        }
+    ]
+}

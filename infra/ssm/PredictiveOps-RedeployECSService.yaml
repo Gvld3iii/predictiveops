@@ -1,0 +1,80 @@
+---
+schemaVersion: '0.3'
+description: PredictiveOps - Force new deployment on an ECS service (self-contained).
+assumeRole: '{{ AutomationAssumeRole }}'
+parameters:
+  Cluster:
+    type: String
+    description: ECS cluster (name or ARN)
+  Service:
+    type: String
+    description: ECS service (name or ARN)
+  AutomationAssumeRole:
+    type: String
+    description: Role to assume
+    default: ''
+mainSteps:
+  - name: UpdateAndWait
+    action: 'aws:executeScript'
+    inputs:
+      Runtime: python3.11
+      Handler: handler
+      InputPayload:
+        Cluster: '{{ Cluster }}'
+        Service: '{{ Service }}'
+        MaxSeconds: 600
+        PollSeconds: 10
+      Script: |
+        import boto3, time
+        ecs = boto3.client('ecs')
+
+        def resolve_cluster_arn(cluster):
+            if cluster.startswith('arn:aws:ecs:'):
+                return cluster
+            arns = ecs.list_clusters()['clusterArns']
+            for a in arns:
+                if a.split('/')[-1] == cluster:
+                    return a
+            raise Exception(f'Cluster not found: {cluster}')
+
+        def resolve_service_arn(cluster_arn, service):
+            if service.startswith('arn:aws:ecs:'):
+                return service
+            d = ecs.describe_services(cluster=cluster_arn, services=[service])
+            svcs = d.get('services') or []
+            if not svcs:
+                raise Exception(f'Service not found: {service}')
+            return svcs[0]['serviceArn']
+
+        def handler(event, ctx):
+            cluster_in = event['Cluster']
+            service_in = event['Service']
+            max_s = int(event.get('MaxSeconds', 600))
+            poll = int(event.get('PollSeconds', 10))
+
+            cluster_arn = resolve_cluster_arn(cluster_in)
+            service_arn = resolve_service_arn(cluster_arn, service_in)
+
+            # Force new deployment
+            ecs.update_service(cluster=cluster_arn, service=service_arn, forceNewDeployment=True)
+
+            # Wait for PRIMARY rolloutState=COMPLETED
+            deadline = time.time() + max_s
+            while time.time() < deadline:
+                r = ecs.describe_services(cluster=cluster_arn, services=[service_arn])
+                svc = (r.get('services') or [None])[0]
+                if not svc:
+                    raise Exception('Service not found during wait')
+                primary = next((d for d in svc.get('deployments', []) if d.get('status') == 'PRIMARY'), None)
+                if primary and primary.get('rolloutState') == 'COMPLETED':
+                    return {
+                        'ClusterArn': cluster_arn,
+                        'ServiceArn': service_arn,
+                        'TaskDefinition': primary.get('taskDefinition'),
+                        'State': primary.get('rolloutState'),
+                        'Reason': primary.get('rolloutStateReason', '')
+                    }
+                time.sleep(poll)
+
+            raise Exception('Timeout waiting for deployment to become COMPLETED')
+

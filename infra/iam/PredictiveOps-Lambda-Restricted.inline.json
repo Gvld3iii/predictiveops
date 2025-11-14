@@ -1,0 +1,32 @@
+{
+    "RoleName": "predictiveops-lambda-role",
+    "PolicyName": "PredictiveOps-Lambda-Restricted",
+    "PolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem"
+                ],
+                "Resource": "arn:aws:dynamodb:us-east-1:916566265947:table/predictiveops_risk"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "sns:Publish",
+                "Resource": "arn:aws:sns:us-east-1:916566265947:predictiveops-alerts"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "ssm:StartAutomationExecution",
+                "Resource": "*"
+            },
+            {
+                "Effect": "Allow",
+                "Action": "iam:PassRole",
+                "Resource": "arn:aws:iam::916566265947:role/predictiveops-automation-role"
+            }
+        ]
+    }
+}

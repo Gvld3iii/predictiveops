@@ -1,0 +1,20 @@
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "AmazonSSMFullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+        },
+        {
+            "PolicyName": "AWSLambdaBasicExecutionRole",
+            "PolicyArn": "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        },
+        {
+            "PolicyName": "AmazonSNSFullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
+        },
+        {
+            "PolicyName": "AmazonDynamoDBFullAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
+        }
+    ]
+}

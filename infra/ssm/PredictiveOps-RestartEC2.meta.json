@@ -1,0 +1,38 @@
+{
+    "Document": {
+        "Hash": "ec8f9af6ee2a30ce6010883d2b83ab0f4afa2f102f5bbf52dfe965d1875d48dd",
+        "HashType": "Sha256",
+        "Name": "PredictiveOps-RestartEC2",
+        "Owner": "916566265947",
+        "CreatedDate": "2025-11-04T17:18:46.071000+00:00",
+        "Status": "Active",
+        "DocumentVersion": "1",
+        "Description": "PredictiveOps - Restart a single EC2 instance by InstanceId.",
+        "Parameters": [
+            {
+                "Name": "InstanceId",
+                "Type": "String",
+                "Description": "The EC2 InstanceId to restart (e.g., i-0123456789abcdef0)"
+            },
+            {
+                "Name": "AutomationAssumeRole",
+                "Type": "String",
+                "Description": "Role for Automation to assume (with EC2 perms)",
+                "DefaultValue": ""
+            }
+        ],
+        "PlatformTypes": [
+            "Windows",
+            "Linux",
+            "MacOS"
+        ],
+        "DocumentType": "Automation",
+        "SchemaVersion": "0.3",
+        "LatestVersion": "1",
+        "DefaultVersion": "1",
+        "DocumentFormat": "YAML",
+        "Tags": [],
+        "Category": [],
+        "CategoryEnum": []
+    }
+}

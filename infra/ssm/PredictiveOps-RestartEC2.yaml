@@ -1,0 +1,32 @@
+---
+schemaVersion: '0.3'
+description: PredictiveOps - Restart a single EC2 instance by InstanceId.
+assumeRole: '{{ AutomationAssumeRole }}'
+parameters:
+  InstanceId:
+    type: String
+    description: The EC2 InstanceId to restart (e.g., i-0123456789abcdef0)
+  AutomationAssumeRole:
+    type: String
+    description: Role for Automation to assume (with EC2 perms)
+    default: ''
+mainSteps:
+  - name: StopInstance
+    action: 'aws:changeInstanceState'
+    inputs:
+      InstanceIds: ['{{ InstanceId }}']
+      DesiredState: stopped
+  - name: WaitStopped
+    action: 'aws:waitForAwsResourceProperty'
+    inputs:
+      Service: ec2
+      Api: DescribeInstances
+      InstanceIds: ['{{ InstanceId }}']
+      PropertySelector: '$.Reservations[0].Instances[0].State.Name'
+      DesiredValues: ['stopped']
+  - name: StartInstance
+    action: 'aws:changeInstanceState'
+    inputs:
+      InstanceIds: ['{{ InstanceId }}']
+      DesiredState: running
+

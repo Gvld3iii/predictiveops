@@ -1,0 +1,49 @@
+{
+    "FunctionName": "predictiveops-lambda",
+    "FunctionArn": "arn:aws:lambda:us-east-1:916566265947:function:predictiveops-lambda",
+    "Runtime": "python3.12",
+    "Role": "arn:aws:iam::916566265947:role/predictiveops-lambda-role",
+    "Handler": "predictive_ops_handler.handler",
+    "CodeSize": 2097,
+    "Description": "",
+    "Timeout": 15,
+    "MemorySize": 128,
+    "LastModified": "2025-11-14T15:22:48.000+0000",
+    "CodeSha256": "aIewhrXJIJm22CzTjofzXF6Hq9zrMfhnq/gnVEPRIF8=",
+    "Version": "$LATEST",
+    "Environment": {
+        "Variables": {
+            "RISK_THRESHOLD": "0.75",
+            "SNS_TOPIC_ARN": "arn:aws:sns:us-east-1:916566265947:predictiveops-alerts",
+            "RISK_TABLE": "predictiveops_risk",
+            "RUNBOOK_ECS": "PredictiveOps-RedeployECSService",
+            "AUTOMATION_ROLE_ARN": "arn:aws:iam::916566265947:role/predictiveops-automation-role",
+            "RUNBOOK_EC2": "PredictiveOps-RestartEC2",
+            "COOLDOWN_SECONDS": "0"
+        }
+    },
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    },
+    "RevisionId": "9be0cbf5-bfb0-4abc-b1d7-c977bb8f5da2",
+    "State": "Active",
+    "LastUpdateStatus": "Successful",
+    "PackageType": "Zip",
+    "Architectures": [
+        "x86_64"
+    ],
+    "EphemeralStorage": {
+        "Size": 512
+    },
+    "SnapStart": {
+        "ApplyOn": "None",
+        "OptimizationStatus": "Off"
+    },
+    "RuntimeVersionConfig": {
+        "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:c010741a32d362a2a9a445adf0a7418ce4fac7ec907bcf1371249e79b7ece18a"
+    },
+    "LoggingConfig": {
+        "LogFormat": "Text",
+        "LogGroup": "/aws/lambda/predictiveops-lambda"
+    }
+}

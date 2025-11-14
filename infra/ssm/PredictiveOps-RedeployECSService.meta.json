@@ -1,0 +1,43 @@
+{
+    "Document": {
+        "Hash": "aab868a617a5655b05d8232108a12f56fd1836a1d2f73f161abeb2de82585762",
+        "HashType": "Sha256",
+        "Name": "PredictiveOps-RedeployECSService",
+        "Owner": "916566265947",
+        "CreatedDate": "2025-11-10T18:45:42.925000+00:00",
+        "Status": "Active",
+        "DocumentVersion": "4",
+        "Description": "PredictiveOps - Force new deployment on an ECS service (self-contained).",
+        "Parameters": [
+            {
+                "Name": "Cluster",
+                "Type": "String",
+                "Description": "ECS cluster (name or ARN)"
+            },
+            {
+                "Name": "Service",
+                "Type": "String",
+                "Description": "ECS service (name or ARN)"
+            },
+            {
+                "Name": "AutomationAssumeRole",
+                "Type": "String",
+                "Description": "Role to assume",
+                "DefaultValue": ""
+            }
+        ],
+        "PlatformTypes": [
+            "Windows",
+            "Linux",
+            "MacOS"
+        ],
+        "DocumentType": "Automation",
+        "SchemaVersion": "0.3",
+        "LatestVersion": "4",
+        "DefaultVersion": "4",
+        "DocumentFormat": "YAML",
+        "Tags": [],
+        "Category": [],
+        "CategoryEnum": []
+    }
+}
