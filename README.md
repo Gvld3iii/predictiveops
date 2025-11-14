@@ -1,15 +1,24 @@
-# ⚡ PredictiveOps — Autonomous Outage Prevention for AWS
+# PredictiveOps — AWS Outage Early-Warning & Auto-Heal
 
-PredictiveOps is an AWS-native early-warning and auto-healing system that detects outages *before* they happen and automatically repairs ECS services or EC2 instances.
+PredictiveOps is an AWS-native early-warning system that detects elevated risk
+of outages using CloudWatch, DevOps Guru-style signals, and Lambda,
+then automatically triggers SSM Automation runbooks to restart EC2 instances
+or redeploy ECS services.
 
-## 🚀 Features
-- Real-time risk scoring (latency, error rate, DNS anomalies)
-- Automatic ECS service redeploys
-- EC2 auto-restart runbook
-- DynamoDB risk history
-- SNS early-warning alerts
-- Full SSM Automation runbooks (production-grade)
-- Built for AWS Marketplace distribution
+## Core Features
+- Risk scoring for latency / error spikes and DNS anomalies
+- Writes risk events to DynamoDB
+- Sends alerts via SNS
+- Triggers SSM runbooks:
+  - `PredictiveOps-RestartEC2`
+  - `PredictiveOps-RedeployECSService`
 
-## 📁 Repo Structure
+## Repo Layout
+- `lambda/` — Lambda handler (`predictive_ops_handler.py`)
+- `infra/` — IAM, SSM, DynamoDB snapshots (JSON/YAML)
+- `infra-snapshot-YYYYMMDD.zip` — exported infra snapshot
 
+## Status
+Prototype validated in AWS CloudShell with:
+- EC2 restart automation ✅
+- ECS redeploy automation ✅
